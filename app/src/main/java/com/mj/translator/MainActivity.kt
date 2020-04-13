@@ -1,10 +1,15 @@
 package com.mj.translator
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
@@ -19,22 +24,105 @@ import java.net.URLEncoder
 
 public class MainActivity : AppCompatActivity() {
 
+    var sourceLang = ""
+    var targetLang = ""
+    var sourceLang2 = ""
+    var targetLang2 = ""
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+        sourcebtn.setOnClickListener {
+            val popup = PopupMenu(this,sourcebtn)
+            popup.inflate(R.menu.lang)
+            popup.setOnMenuItemClickListener {
+                sourcebtn.text = it.title
+                true
+            }
+            popup.show()
+        }
+
+        targetbtn.setOnClickListener {
+            val popup = PopupMenu(this,targetbtn)
+            popup.inflate(R.menu.lang)
+            popup.setOnMenuItemClickListener {
+                targetbtn.text = it.title
+                true
+            }
+            popup.show()
+        }
+
+        changebtn.setOnClickListener {
+            val temp = sourcebtn.text
+
+            sourcebtn.text = targetbtn.text
+            targetbtn.text = temp
+        }
 
 
 
-//        translatebtn.setOnClickListener {
-//
-//            val asyncTask = NaverTranslateTask()
-//            asyncTask.execute(editText.text.toString())
-//            val asyncTask2 = KakaoTranslateTask()
-//            asyncTask2.execute(editText.text.toString())
-//        }
+        translatebtn.setOnClickListener {
+
+            if(editText.text.toString().length == 0){
+                Toast.makeText(this,"번역할 내용을 입력하세요",Toast.LENGTH_SHORT).show()
+            }
+
+            else if(sourcebtn.text == targetbtn.text){
+                Toast.makeText(this,"번역 언어가 동일합니다. 다른 언어로 선택하세요",Toast.LENGTH_SHORT).show()
+            }
+
+            else{
+
+                if (sourcebtn.text == "영어"){
+                    sourceLang = "en"
+                    sourceLang2 = "en"
+                }
+                else if (sourcebtn.text == "한국어"){
+                    sourceLang = "ko"
+                    sourceLang2 = "kr"
+                }
+                else if (sourcebtn.text == "일본어"){
+                    sourceLang = "ja"
+                    sourceLang2 = "jp"
+                }
+                else if (sourcebtn.text == "중국"){
+                    sourceLang = "zh-CN"
+                    sourceLang2 = "cn"
+                }
+
+                if (targetbtn.text == "영어"){
+                    targetLang = "en"
+                    targetLang2 = "en"
+                }
+                else if (targetbtn.text == "한국어"){
+                    targetLang = "ko"
+                    targetLang2 = "kr"
+                }
+                else if (targetbtn.text == "일본어"){
+                    targetLang = "ja"
+                    targetLang2 = "jp"
+                }
+                else if (targetbtn.text == "중국어"){
+                    targetLang = "zh-CN"
+                    targetLang2 = "cn"
+                }
+
+
+
+                val asyncTask = NaverTranslateTask()
+                asyncTask.execute(editText.text.toString())
+
+
+                val asyncTask2 = KakaoTranslateTask()
+                asyncTask2.execute(editText.text.toString())
+            }
+
+        }
     }
 
     inner class NaverTranslateTask() : AsyncTask<String, Void, String>() {
@@ -43,8 +131,8 @@ public class MainActivity : AppCompatActivity() {
         val clientId = "AwAUJEDlEenilEpdoQFZ"
         val clientSecret = "wrHp5MN5uu"
 
-        val sourceLang = "en"
-        val targetLang = "ko"
+//        val sourceLang = "en"
+//        val targetLang = "ko"
 
 
         override fun onPreExecute() {
@@ -55,7 +143,6 @@ public class MainActivity : AppCompatActivity() {
 
             val sourceText = params[0]
             try {
-                //String text = URLEncoder.encode("만나서 반갑습니다.", "UTF-8");
                 val text = URLEncoder.encode(sourceText, "UTF-8")
                 val apiURL = "https://openapi.naver.com/v1/papago/n2mt";
                 val url = URL(apiURL);
@@ -131,8 +218,8 @@ public class MainActivity : AppCompatActivity() {
         val clientSecret = "wrHp5MN5uu"
         val apikey = "ee05a8584607f80bc72156c4c7106750"
 
-        val sourceLang = "en"
-        val targetLang = "kr"
+//        val sourceLang = "en"
+//        val targetLang = "kr"
 
 
         override fun onPreExecute() {
@@ -144,7 +231,7 @@ public class MainActivity : AppCompatActivity() {
             val sourceText = params[0]
             try {
                 val text = URLEncoder.encode(sourceText, "UTF-8")
-                val postParams = "src_lang=" + sourceLang + "&target_lang=" + targetLang + "&query=" + text;
+                val postParams = "src_lang=" + sourceLang2 + "&target_lang=" + targetLang2 + "&query=" + text;
                 val apiURL = "https://kapi.kakao.com/v1/translation/translate?"+postParams;
                 val url = URL(apiURL);
                 val con: HttpURLConnection = url.openConnection() as HttpURLConnection;
