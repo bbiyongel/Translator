@@ -90,7 +90,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
                 android:background="@drawable/box"
                 android:padding="10dp"
                 android:text="TextView"
@@ -111,9 +113,11 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/box_kakao"
+                android:background="@drawable/box"
                 android:padding="10dp"
                 android:text="TextView"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 

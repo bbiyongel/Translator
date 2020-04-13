@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/jap"
-        android:title="일본"/>
+        android:title="일본어"/>
 
     <item
         android:id="@+id/ch"
