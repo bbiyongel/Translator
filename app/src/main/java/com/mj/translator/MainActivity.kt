@@ -1,5 +1,6 @@
 package com.mj.translator
 
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.AsyncTask
@@ -29,13 +30,29 @@ public class MainActivity : AppCompatActivity() {
     var sourceLang2 = ""
     var targetLang2 = ""
 
+    private var myClipboard: ClipboardManager? = null
+    private var myClip: ClipData? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        myClipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+
+        copybtn1.setOnClickListener {
+            myClip = ClipData.newPlainText("text", papago.text);
+            myClipboard?.setPrimaryClip(myClip);
+
+            Toast.makeText(this, "클립보드에 복사되었습니다", Toast.LENGTH_SHORT).show();
+        }
+
+        copybtn2.setOnClickListener {
+            myClip = ClipData.newPlainText("text", kakao.text);
+            myClipboard?.setPrimaryClip(myClip);
+
+            Toast.makeText(this, "클립보드에 복사되었습니다", Toast.LENGTH_SHORT).show();
+        }
 
         sourcebtn.setOnClickListener {
             val popup = PopupMenu(this,sourcebtn)
