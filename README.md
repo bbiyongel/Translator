@@ -1,6 +1,6 @@
 # 2가지 번역기 비교 어플
 
-<p align="center"> <img width="150" alt="선행" src="https://user-images.githubusercontent.com/37679062/79196272-ba923a80-7e6a-11ea-9d21-b432e92bb789.png"> </p>
+<p align="center"> <img width="500" alt="선행" src="https://user-images.githubusercontent.com/37679062/79196272-ba923a80-7e6a-11ea-9d21-b432e92bb789.png"> </p>
 
 
 
@@ -10,7 +10,7 @@ __"간단한 인터페이스로 더 정확한 번역을 위한 2가지 번역기
 
 ### 사용된 기술
 
-<p align="center"> <img width="700" alt="선행" src="https://user-images.githubusercontent.com/37679062/79195673-a13cbe80-7e69-11ea-948d-dac4bdf77b48.png"> </p>
+<p align="center"> <img width="500" alt="선행" src="https://user-images.githubusercontent.com/37679062/79195673-a13cbe80-7e69-11ea-948d-dac4bdf77b48.png"> </p>
 
 ### 현재 검색 가능한 언어
 
