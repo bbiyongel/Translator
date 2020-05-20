@@ -26,3 +26,6 @@ __"간단한 인터페이스로 더 정확한 번역을 위한 2가지 번역기
 
 
 
+### 구글 플레이 스토어 
+https://play.google.com/store/apps/details?id=com.mj.translator
+
